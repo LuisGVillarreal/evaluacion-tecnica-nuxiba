@@ -19,12 +19,21 @@ public class LoginsController : ControllerBase
 
     // GET /api/logins
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Login>>> GetAll()
+    public async Task<IActionResult> GetAll()
     {
         try
         {
             var logins = await _context.Logins
                 .Include(l => l.User)
+                .Select(l => new
+                {
+                    l.Id,
+                    l.User_id,
+                    l.Extension,
+                    l.TipoMov,
+                    l.Fecha,
+                    Usuario = l.User != null ? l.User.Login : null
+                })
                 .ToListAsync();
 
             return Ok(logins);
