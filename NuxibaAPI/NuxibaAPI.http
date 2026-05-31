@@ -1,0 +1,6 @@
+@NuxibaAPI_HostAddress = http://localhost:5109
+
+GET {{NuxibaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
